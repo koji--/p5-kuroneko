@@ -1,37 +1,17 @@
 NAME
-    App::kuroneko - migrate server data, setting, library, module and service.
+    kuroneko - text display tool like adventure game
 
 SYNOPSIS
-    kuroneko --config=/path/to/migration_config
-
-    Run `kuroneko -h' for more options.
+    kuroneko -f /path/to/textfile -c 40000 -l 200000
 
 DESCRIPTION
-    kuroneko is a script to migrate something between servers.
-
-INSTALLATION
-
-    App::kuroneko installation is straightforward. If your CPAN shell is set up,
-    you should just be able to do
-
-    % cpan App::kuroneko
-
-    Download it, unpack it, then build it as per the usual:
-
-    % perl Makefile.PL
-    % make && make test
-
-    Then install it:
-
-    % make install
+    kuroneko is a text display tool like adventure game.
+    This can set sleep time between print one charcter and
+      sleep time as ending one line.
 
 DOCUMENTATION
 
-    App::kuroneko documentation is available as in POD. So you can do:
-
-    % perldoc App::kuroneko
-
-    to read the documentation online with your favorite pager.
+    Sorry, document is none yet.
 
 LICENSE
     Same as Perl.
