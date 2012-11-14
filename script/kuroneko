@@ -1,0 +1,38 @@
+#!/usr/bin/env perl
+
+# Usage
+# ./kuroneko -f test.text -c 40000 -l 200000
+
+use strict;
+use warnings;
+use utf8;
+use Time::HiRes qw(usleep);
+use Getopt::Long;
+
+our $VERSION = '0.001';
+
+my $filename;
+my $char_speed = 40000;
+my $line_wait  = 400000;
+GetOptions(
+    "filename=s"   => \$filename,
+    "char_speed=i" => \$char_speed,
+    "line_wait=i"  => \$line_wait,
+);
+
+open my $fh, "<", $filename;
+STDOUT->autoflush(1);
+
+while (<$fh>) {
+    my $line = $_;
+    my @chars = split //, $line;
+    foreach my $char (@chars) {
+        print $char;
+        usleep($char_speed);
+    }
+    usleep($line_wait);
+}
+
+END {
+    close $fh if $fh;
+}
