@@ -1,38 +1,84 @@
 #!/usr/bin/env perl
 
 # Usage
-# ./kuroneko -f test.text -c 40000 -l 200000
+# ./kuroneko -f test.text -s 40000 -l 200000
 
 use strict;
 use warnings;
 use utf8;
 use Time::HiRes qw(usleep);
 use Getopt::Long;
+use Acme::EyeDrops qw(sightly);
+use File::Temp qw(tempfile);
+use Encode;
+use Term::ANSIColor;
 
 our $VERSION = '0.001';
 
 my $filename;
 my $char_speed = 40000;
 my $line_wait  = 400000;
+my $bom_timer  = 0;
+my $holy       = 0;
+my $color      = 0;
+
 GetOptions(
     "filename=s"   => \$filename,
-    "char_speed=i" => \$char_speed,
+    "speed=i"      => \$char_speed,
     "line_wait=i"  => \$line_wait,
+    "bom_timer=i"  => \$bom_timer,
+    "holy"         => \$holy,
+    "color"        => \$color,
 );
 
+# holy night
+if ($holy) {
+    draw_illust('candle');
+    exit;
+}
+
+# start text scroll
 open my $fh, "<", $filename;
 STDOUT->autoflush(1);
+print "\n" x 200;
 
+my $start = time;
 while (<$fh>) {
     my $line = $_;
     my @chars = split //, $line;
     foreach my $char (@chars) {
         print $char;
         usleep($char_speed);
+        if ($bom_timer && time - $start > $bom_timer) {
+            print "\n" x 200;
+            draw_illust('smiley', $color);
+            exit;
+        }
     }
     usleep($line_wait);
+    if ($bom_timer && time - $start > $bom_timer) {
+        print "\n" x 200;
+        draw_illust('smiley', $color);
+        exit;
+    }
 }
 
 END {
     close $fh if $fh;
+}
+
+# sub routine
+sub draw_illust {
+    my $shape = shift;
+    my $color = shift;
+    my ( undef, $draw_script ) = tempfile;
+    print color 'cyan' if $color;
+    print sightly(
+        {
+            Shape      => $shape,
+            SourceFile => $draw_script,
+            Regex      => 1,
+        }
+    );
+    print color 'reset' if $color;
 }

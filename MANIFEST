@@ -6,8 +6,10 @@ inc/Module/Install/Can.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
+inc/Module/Install/MakeMaker.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/Repository.pm
+inc/Module/Install/Scripts.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 inc/Test/More.pm
@@ -18,6 +20,7 @@ META.yml
 MYMETA.json
 MYMETA.yml
 README
+script/kuroneko
 t/00_compile.t
 xt/01_podspell.t
 xt/02_perlcritic.t
