@@ -10,7 +10,6 @@ use Time::HiRes qw(usleep);
 use Getopt::Long;
 use Acme::EyeDrops qw(sightly);
 use File::Temp qw(tempfile);
-use Encode;
 use Term::ANSIColor;
 
 our $VERSION = '0.001';

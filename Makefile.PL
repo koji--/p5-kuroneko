@@ -2,7 +2,8 @@ use inc::Module::Install;
 name 'App-kuroneko';
 all_from 'lib/App/kuroneko.pm';
 
-# requires '';
+requires 'Term::ANSIColor' => 0;
+requires 'Acme::EyeDrops'  => 0;
 
 tests 't/*.t';
 author_tests 'xt';
